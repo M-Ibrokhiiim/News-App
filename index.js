@@ -6,19 +6,19 @@ let prompt='Daily'
 
 
 // Function for  fetch data when enter on UI
-// async function getNews() {
-//     try{
-//       const url=`https://newsapi.org/v2/top-headlines?country=us&pageSize=50&apiKey=${apiKey}`
-//       const response=await fetch(url)
-//       const data=await response.json()
-//       return data.articles
-//     }
-//     catch(error){
-//         console.log(error='Please research again with other theme...');
-//         return []
-//     }
+async function getNews() {
+    try{
+      const url=`https://newsapi.org/v2/top-headlines?country=us&pageSize=60&apiKey=${apiKey}`
+      const response=await fetch(url)
+      const data=await response.json()
+      return data.articles
+    }
+    catch(error){
+        console.log(error='Please research again with other theme...');
+        return []
+    }
     
-// }
+}
 
 // Function for  take input field for fetch data 
 searchBtn.addEventListener('click',async ()=>{
@@ -92,15 +92,15 @@ function displayBlocks(articles){
 }
 
 // Function for run all function 
-// (async()=>{
-//     try{
-//         const articles=await getNews()
-//         displayBlocks(articles)
-//     } 
-//     catch(error){
-//         console.log(error);
-//     }
-// })()
+(async()=>{
+    try{
+        const articles=await getNews()
+        displayBlocks(articles)
+    } 
+    catch(error){
+        console.log(error);
+    }
+})()
 
  
 
