@@ -4,36 +4,39 @@ const searchBtn=document.getElementById('searchbtn')
 const input=document.getElementById('theme-input')
 let prompt='Daily'
 
-async function getNews() {
-    try{
-      const url=`https://newsapi.org/v2/top-headlines?country=us&pageSize=50&apiKey=${apiKey}`
-      const response=await fetch(url)
-      const data=await response.json()
-      return data.articles
-    }
-    catch(error){
-        console.log(error='Please research again with other theme...');
-        return []
-    }
-    
-}
 
+// Function for  fetch data when enter on UI
+// async function getNews() {
+//     try{
+//       const url=`https://newsapi.org/v2/top-headlines?country=us&pageSize=50&apiKey=${apiKey}`
+//       const response=await fetch(url)
+//       const data=await response.json()
+//       return data.articles
+//     }
+//     catch(error){
+//         console.log(error='Please research again with other theme...');
+//         return []
+//     }
+    
+// }
+
+// Function for  take input field for fetch data 
 searchBtn.addEventListener('click',async ()=>{
 
-    let query=input.value.trim()
+    let inputField=input.value.trim()
+
     try{
-        const articles=await fetchNews(query)
+        const articles=await searchedNews(inputField)
         displayBlocks(articles)
         query.value=''
-
     }
     catch(error){
         console.log(error);
     }
-    
 })
 
-async function fetchNews(query){
+// Function for searching through inputField
+async function searchedNews(query){
 
     try{
         const url=`https://newsapi.org/v2/everything?q=${query}&pageSize=50&apiKey=${apiKey}`
@@ -48,6 +51,7 @@ async function fetchNews(query){
     
 }
 
+// Function for display fetched data for UI
 function displayBlocks(articles){
     newsContainer.innerHTML=""
     articles.forEach(article =>{
@@ -87,15 +91,16 @@ function displayBlocks(articles){
     });
 }
 
-(async()=>{
-    try{
-        const articles=await getNews()
-        displayBlocks(articles)
-    }
-    catch(error){
-        console.log(error);
-    }
-})()
+// Function for run all function 
+// (async()=>{
+//     try{
+//         const articles=await getNews()
+//         displayBlocks(articles)
+//     } 
+//     catch(error){
+//         console.log(error);
+//     }
+// })()
 
  
 
