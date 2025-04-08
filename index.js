@@ -2,11 +2,8 @@ const apiKey='81969a18c4464c8ca39bdf8f38bb815d'
 const newsContainer=document.getElementById('main-sectionId')
 const searchBtn=document.getElementById('searchbtn')
 const input=document.getElementById('theme-input')
-let prompt='Daily'
-
 
  
-
 // Function for  catch articles from API 
 async function persistDataForEntranceUi(){
     try{
@@ -35,9 +32,8 @@ async function persistDataForEntranceUi(){
 
 // Spreading API data on UI
 function UIspreadshit(articles){ 
-    console.log(articles);
+
     newsContainer.innerHTML=""
-    
     articles.forEach((article)=>{
         const div=document.createElement('div')
         div.classList.add('main-section-div')
@@ -78,7 +74,7 @@ searchBtn.addEventListener('click',async ()=>{
 
 async function searchByQuery(query){
     try{
-        const URL=`https://newsapi.org/v2/everything?q=${query}&pageSize=10&apiKey=${apiKey}`
+        const URL=`https://newsapi.org/v2/everything?q=${query}&pageSize=20&apiKey=${apiKey}`
         const response=await fetch(URL)
         const data=await response.json()
         const articles=await data.articles
