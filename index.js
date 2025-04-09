@@ -3,37 +3,35 @@ const newsContainer=document.getElementById('main-sectionId')
 const searchBtn=document.getElementById('searchbtn')
 const input=document.getElementById('theme-input')
 
- 
-// Function for  catch articles from API 
-async function persistDataForEntranceUi(){
+
+async function newsForIntrance(){
+    const URL=`https://newsapi.org/v2/everything?q=news&apiKey=${apiKey}`
     try{
-       const URL=`https://newsapi.org/v2/everything?q=news&pageSize=20&apiKey=${apiKey}`
-       const response=await fetch (URL)
-       const data=await response.json()
-       const articles= await data.articles
-       return articles
+        const response=await fetch(URL)
+        const data= await response.json()
+        const articles= await data.articles
+        return articles
     }
-    catch(error){
-    console.log(error);
+    catch(error){  
+        console.log(error);
     }
 }
 
-// Calling on API data through IIF
+
 (async()=>{
     try{
-        const articles=await persistDataForEntranceUi()
-        UIspreadshit(articles)
+     const articles=await newsForIntrance()
+     showNewsToUI(articles)
     }
     catch(error){
-        console.log(error);
+        console.log(error);    
     }
 })()
 
 
-// Spreading API data on UI
-function UIspreadshit(articles){ 
 
-    newsContainer.innerHTML=""
+function showNewsToUI(articles){
+   newsContainer.innerHTML=""
     articles.forEach((article)=>{
         const div=document.createElement('div')
         div.classList.add('main-section-div')
@@ -52,29 +50,19 @@ function UIspreadshit(articles){
         div.appendChild(img)
         div.appendChild(h6)
         div.appendChild(p)
-        
+    
         div.addEventListener("click",()=>{
             window.open(article.url)
         })
         newsContainer.appendChild(div)
-    })
+    })   
 }
 
 
-searchBtn.addEventListener('click',async ()=>{
-    let inputField=input.value.trim()
+async function searchedNews(query){
+    
     try{
-        const queryData=await searchByQuery(inputField)
-        UIspreadshit(queryData)
-    }catch(error){
-        console.log(error);
-    }
-})
-
-
-async function searchByQuery(query){
-    try{
-        const URL=`https://newsapi.org/v2/everything?q=${query}&pageSize=20&apiKey=${apiKey}`
+        const URL=`https://newsapi.org/v2/everything?q=${query}&pageSize=40&apiKey=${apiKey}`
         const response=await fetch(URL)
         const data=await response.json()
         const articles=await data.articles
@@ -84,3 +72,14 @@ async function searchByQuery(query){
         console.log(error);
     }
 }
+
+
+searchBtn.addEventListener('click',async()=>{
+    const inputField=input.value
+    try{
+       const articles= await searchedNews(inputField)
+       showNewsToUI(articles)
+    }catch(error){
+        console.log(error);
+    }
+})
