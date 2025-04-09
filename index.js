@@ -83,3 +83,19 @@ searchBtn.addEventListener('click',async()=>{
         console.log(error);
     }
 })
+
+
+document.addEventListener("keypress",(e)=>{
+    if(e.key==="Enter"){
+        async function a(){
+            const inputField=input.value
+            try{
+               const articles= await searchedNews(inputField)
+               showNewsToUI(articles)
+            }catch(error){
+                console.log(error);
+            }
+        }
+        a()
+    }
+})
