@@ -3,7 +3,7 @@ const newsContainer=document.getElementById('main-sectionId')
 const searchBtn=document.getElementById('searchbtn')
 const input=document.getElementById('theme-input')
 
-
+// Function for intrance of UI
 async function newsForIntrance(){
     const URL=`https://newsapi.org/v2/everything?q=news&apiKey=${apiKey}`
     try{
@@ -17,7 +17,7 @@ async function newsForIntrance(){
     }
 }
 
-
+// Connecter function UI entrance data with UI spread data function
 (async()=>{
     try{
      const articles=await newsForIntrance()
@@ -29,7 +29,7 @@ async function newsForIntrance(){
 })()
 
 
-
+// Function for spread data for UI
 function showNewsToUI(articles){
    newsContainer.innerHTML=""
     articles.forEach((article)=>{
@@ -58,7 +58,7 @@ function showNewsToUI(articles){
     })   
 }
 
-
+// Funtion for find searched theme from API
 async function searchedNews(query){
     
     try{
@@ -73,7 +73,7 @@ async function searchedNews(query){
     }
 }
 
-
+// Function for take input field and transit data on UI spreader function
 searchBtn.addEventListener('click',async()=>{
     const inputField=input.value
     try{
