@@ -1,3 +1,4 @@
+"use strict"
 const apiKey='81969a18c4464c8ca39bdf8f38bb815d'
 const newsContainer=document.getElementById('main-sectionId')
 const searchBtn=document.getElementById('searchbtn')
